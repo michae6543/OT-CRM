@@ -70,6 +70,7 @@ public class MercadoPagoController {
     @PostMapping("/api/v1/mp/crear-suscripcion")
     public ResponseEntity<Map<String, Object>> crearSuscripcion(
             @RequestParam Long planId,
+            @RequestParam(required = false) String payerEmail,
             @AuthenticationPrincipal UserDetails userDetails) {
         try {
             @SuppressWarnings("null")
@@ -78,9 +79,12 @@ public class MercadoPagoController {
             Usuario usuario = usuarioRepository.findByUsername(userDetails.getUsername())
                     .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
+            // Usar el email provisto por el usuario en el checkout, o el del CRM como fallback
+            String emailPagador = (payerEmail != null && !payerEmail.isBlank()) ? payerEmail : usuario.getEmail();
+
             Map<String, Object> body = new HashMap<>();
             body.put("reason",              "CRM O'T - Plan " + plan.getNombre());
-            body.put("payer_email",         usuario.getEmail());
+            body.put("payer_email",         emailPagador);
             body.put("back_url",            baseUrl + "/planes?pago=exitoso");
             body.put("external_reference",  usuario.getId() + "|" + planId);
             body.put("status",              "pending");
