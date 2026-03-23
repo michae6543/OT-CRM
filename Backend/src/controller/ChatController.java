@@ -65,9 +65,12 @@ public class ChatController {
     }
 
     @GetMapping("/{clienteId}/historial")
-    public List<Mensaje> historial(@PathVariable @NonNull Long clienteId, @AuthenticationPrincipal UserDetails userDetails) {
+    public List<Mensaje> historial(@PathVariable @NonNull Long clienteId,
+                                   @RequestParam(required = false) Long beforeId,
+                                   @RequestParam(defaultValue = "50") int size,
+                                   @AuthenticationPrincipal UserDetails userDetails) {
         validarAccesoCliente(clienteId, userDetails);
-        return chatService.historial(clienteId);
+        return chatService.historialPaginado(clienteId, beforeId, size);
     }
 
     @PostMapping("/{clienteId}/send")
