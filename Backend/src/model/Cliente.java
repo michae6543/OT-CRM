@@ -104,6 +104,7 @@ public class Cliente {
         this.saldo = presupuesto;
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     public String getNombreInstancia() {
         return dispositivo != null ? dispositivo.getAlias() : null;
     }
