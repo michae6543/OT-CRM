@@ -75,29 +75,30 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     @Query(value = "UPDATE clientes SET dispositivo_id = NULL WHERE dispositivo_id = :dispositivoId", nativeQuery = true)
     void desvincularClientesDeDispositivo(@Param("dispositivoId") Long dispositivoId);
 
-    @EntityGraph(attributePaths = {"etapa", "dispositivo"})
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c WHERE c.agencia.id = :agenciaId AND (LOWER(c.nombre) LIKE LOWER(CONCAT('%', :query, '%')) OR c.telefono LIKE %:query% OR (c.dispositivo IS NOT NULL AND LOWER(c.dispositivo.alias) LIKE LOWER(CONCAT('%', :query, '%'))))")
     List<Cliente> buscarGlobal(@Param("agenciaId") Long agenciaId, @Param("query") String query, Pageable pageable);
 
-    @EntityGraph(attributePaths = {"etapa", "dispositivo"})
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c WHERE c.agencia.id = :agenciaId ORDER BY c.ultimoMensajeFecha DESC NULLS LAST")
     List<Cliente> findByAgenciaIdPaginatedByLastMessage(
             @Param("agenciaId") Long agenciaId, Pageable pageable);
 
-    @EntityGraph(attributePaths = {"etapa", "dispositivo"})
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c JOIN c.etiquetas e WHERE c.agencia.id = :agenciaId AND e.id = :etiquetaId ORDER BY c.ultimoMensajeFecha DESC NULLS LAST")
     List<Cliente> findByAgenciaIdAndEtiquetaIdPaginated(
             @Param("agenciaId") Long agenciaId,
             @Param("etiquetaId") Long etiquetaId,
             Pageable pageable);
 
-    @EntityGraph(attributePaths = {"etapa", "dispositivo"})
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c WHERE c.agencia.id = :agenciaId AND c.etapa.id = :etapaId ORDER BY c.id DESC")
     List<Cliente> findByAgenciaIdAndEtapaId(
             @Param("agenciaId") Long agenciaId,
             @Param("etapaId") Long etapaId,
             Pageable pageable);
 
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("""
         SELECT c FROM Cliente c JOIN c.etiquetas e
         WHERE c.agencia.id = :agenciaId
@@ -111,12 +112,14 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             @Param("etiquetaId") Long etiquetaId,
             Pageable pageable);
 
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c WHERE c.agencia.id = :agenciaId AND c.id < :afterId ORDER BY c.id DESC")
     List<Cliente> findByAgenciaIdAndIdLessThan(
             @Param("agenciaId") Long agenciaId,
             @Param("afterId") Long afterId,
             Pageable pageable);
 
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("SELECT c FROM Cliente c WHERE c.agencia.id = :agenciaId AND c.etapa.id = :etapaId AND c.id < :afterId ORDER BY c.id DESC")
     List<Cliente> findByAgenciaIdAndEtapaIdAndIdLessThan(
             @Param("agenciaId") Long agenciaId,
@@ -124,6 +127,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             @Param("afterId") Long afterId,
             Pageable pageable);
 
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("""
         SELECT c FROM Cliente c JOIN c.etiquetas e
         WHERE c.agencia.id = :agenciaId
@@ -137,6 +141,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
             @Param("afterId") Long afterId,
             Pageable pageable);
 
+    @EntityGraph(attributePaths = {"etapa", "dispositivo", "etiquetas"})
     @Query("""
         SELECT c FROM Cliente c JOIN c.etiquetas e
         WHERE c.agencia.id = :agenciaId
